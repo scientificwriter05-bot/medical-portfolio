@@ -199,14 +199,14 @@ function Dashboard(){
   const w=useW();
   const services=[
     {id:"spss-workflow",icon:"📊",title:"Statistical Analysis",sub:"SPSS · R · STATA",color:"#3B82F6"},
+    {id:"gallery",icon:"🗂️",title:"Sample Deliverables",sub:"Real worked examples",color:"#0891B2"},
     {id:"tlf",icon:"📋",title:"TLF Development",sub:"Tables · Listings · Figures",color:TEAL},
     {id:"capability",icon:"✍️",title:"Manuscript Writing",sub:"IMRAD · Abstract · Cover Letter",color:"#7C3AED"},
-    {id:"prisma",icon:"🔍",title:"Literature Reviews",sub:"Narrative · Systematic · PRISMA",color:"#F59E0B"},
+    {id:"roadmap",icon:"🗺️",title:"Publication Roadmap",sub:"Idea → Indexed Publication",color:"#EA580C"},
     {id:"prisma",icon:"🧩",title:"Systematic Reviews",sub:"PRISMA 2020 · Meta-Analysis",color:"#EF4444"},
     {id:"methodology",icon:"📝",title:"Protocol Development",sub:"IRB · Synopsis · SAP",color:"#16A34A"},
-    {id:"packages",icon:"📬",title:"Publication Support",sub:"Journal Selection · Submission",color:"#DB2777"},
-    {id:"quality",icon:"✅",title:"Scientific Review",sub:"QC · Consistency · Accuracy",color:"#0891B2"},
-    {id:"deliverables",icon:"🎯",title:"Research Consulting",sub:"Strategy · Design · Guidance",color:"#D97706"},
+    {id:"reviewer",icon:"🔁",title:"Reviewer Responses",sub:"Point-by-point rebuttals",color:"#DB2777"},
+    {id:"quality",icon:"✅",title:"Scientific Review",sub:"QC · Consistency · Accuracy",color:"#0E7A6B"},
   ];
   const scrollTo=(id)=>{
     const el=document.getElementById(id);
@@ -904,49 +904,58 @@ function WhoIHelp(){
   );
 }
 
+
+/* ════════════════════════════════════════════════════════════════
+   Medical Specialties Supported — expanded, requested set of 16
+   (replaces SpecialtiesSection's grid content; keeps same shell)
+   ════════════════════════════════════════════════════════════════ */
 function SpecialtiesSection(){
   const[open,setOpen]=useState(null);
   const w=useW();
   const specs=[
-    {n:"Internal Medicine",i:"🫀",d:"Hypertension, DM, CKD, metabolic syndrome — prospective and retrospective study support."},
-    {n:"Cardiology",i:"❤️",d:"CV outcomes, RCT support, ECG/echo data, cardiovascular risk stratification."},
-    {n:"Endocrinology",i:"⚗️",d:"Glycaemic control, hormonal assay interpretation, thyroid and adrenal research."},
-    {n:"Pulmonology",i:"🫁",d:"Spirometry data, COPD outcomes, lung function analysis, respiratory trial support."},
-    {n:"Nephrology",i:"🩺",d:"eGFR analysis, CKD staging, dialysis outcomes, renal replacement therapy research."},
-    {n:"Neurology",i:"🧠",d:"Stroke outcomes, cognitive scores, neurological rating scales, MRI data integration."},
-    {n:"Psychiatry",i:"🧩",d:"Validated psychiatric scales (PHQ-9, GAF, PANSS), mental health outcomes research."},
-    {n:"Oncology",i:"🎗️",d:"Survival analysis, response rates, RECIST criteria, oncology RCT support."},
-    {n:"Pediatrics",i:"👶",d:"Growth chart analysis, paediatric scoring systems, developmental outcome studies."},
-    {n:"Orthopedics",i:"🦴",d:"Functional scores (VAS, KOOS, SF-36), implant registry, surgical outcomes."},
-    {n:"General Surgery",i:"🏥",d:"Post-operative outcomes, complication analysis, surgical technique comparison."},
-    {n:"Obstetrics & Gynecology",i:"🌸",d:"Maternal outcomes, fertility analysis, hormonal data, obstetric complication studies."},
-    {n:"Ophthalmology",i:"👁️",d:"Visual acuity, IOP data, retinal imaging outcomes, ophthalmic trial support."},
-    {n:"ENT",i:"👂",d:"Audiological data, surgical outcome studies, nasal/sinus scoring systems."},
-    {n:"Critical Care",i:"⚡",d:"ICU outcome data, APACHE/SOFA scores, ventilator parameters, sepsis research."},
-    {n:"Infectious Disease",i:"🦠",d:"Antimicrobial resistance, outbreak data, infection control research."},
-    {n:"Dermatology",i:"🔬",d:"PASI/DLQI scores, dermatological outcome research."},
-    {n:"Community Medicine",i:"🏘️",d:"Epidemiological studies, public health surveys, community intervention research."},
+    {n:"General Medicine",i:"🩺",d:"Hypertension, DM, CKD, metabolic syndrome — prospective and retrospective study support.",ex:"Predictors of 30-day mortality in hospitalised T2DM patients (n=184) — logistic regression, full IMRAD manuscript."},
+    {n:"Cardiology",i:"❤️",d:"CV outcomes, RCT support, ECG/echo data, cardiovascular risk stratification.",ex:"SGLT-2 inhibitors and MACE — PRISMA systematic review and meta-analysis (35 RCTs, n=28,471)."},
+    {n:"Oncology",i:"🎗️",d:"Survival analysis, response rates, RECIST criteria, oncology RCT support.",ex:"Kaplan-Meier overall survival by treatment arm with Cox regression and at-risk tables."},
+    {n:"Pulmonology",i:"🫁",d:"Spirometry data, COPD outcomes, lung function analysis, respiratory trial support.",ex:"Cross-sectional analysis of spirometry parameters vs. symptom scores — STROBE reporting."},
+    {n:"Critical Care",i:"⚡",d:"ICU outcome data, APACHE/SOFA scores, ventilator parameters, sepsis research.",ex:"ICU admission and mechanical ventilation as outcomes — chi-square and logistic regression."},
+    {n:"Endocrinology",i:"⚗️",d:"Glycaemic control, hormonal assay interpretation, thyroid and adrenal research.",ex:"HbA1c subgroup forest plot showing effect modification on cardiovascular benefit (p-interaction=0.031)."},
+    {n:"Nephrology",i:"🧪",d:"eGFR analysis, CKD staging, dialysis outcomes, renal replacement therapy research.",ex:"eGFR <60 ml/min as an independent mortality predictor (adjusted OR 2.11, 95% CI 1.08–4.13)."},
+    {n:"Neurology",i:"🧠",d:"Stroke outcomes, cognitive scores, neurological rating scales, MRI data integration.",ex:"Survival and functional-outcome analysis using validated neurological scoring systems."},
+    {n:"Psychiatry",i:"🧩",d:"Validated psychiatric scales (PHQ-9, GAF, PANSS), mental health outcomes research.",ex:"Cross-sectional survey analysis with descriptive statistics and STROBE-compliant reporting."},
+    {n:"Pediatrics",i:"👶",d:"Growth chart analysis, paediatric scoring systems, developmental outcome studies.",ex:"Cohort analysis of growth parameters with age- and sex-adjusted regression models."},
+    {n:"Orthopedics",i:"🦴",d:"Functional scores (VAS, KOOS, SF-36), implant registry, surgical outcomes.",ex:"Pre/post-operative functional score comparison using paired t-tests and effect sizes."},
+    {n:"Obstetrics & Gynecology",i:"🌸",d:"Maternal outcomes, fertility analysis, hormonal data, obstetric complication studies.",ex:"Retrospective cohort of obstetric complications with multivariable logistic regression."},
+    {n:"Dermatology",i:"🔬",d:"PASI/DLQI scores, dermatological outcome research.",ex:"Treatment-response analysis using validated severity indices with before/after comparison."},
+    {n:"ENT",i:"👂",d:"Audiological data, surgical outcome studies, nasal/sinus scoring systems.",ex:"Pre/post-surgical audiometric outcome analysis with non-parametric testing."},
+    {n:"Ophthalmology",i:"👁️",d:"Visual acuity, IOP data, retinal imaging outcomes, ophthalmic trial support.",ex:"Visual acuity change analysis with repeated-measures statistical models."},
+    {n:"Surgery",i:"🏥",d:"Post-operative outcomes, complication analysis, surgical technique comparison.",ex:"Post-operative complication rates compared across techniques — chi-square / Fisher's exact."},
   ];
   return(
-    <ExpandSection id="specialties" dark label="Clinical Scope" title="Specialties Supported" sub="Research methodology and manuscript support across all major medical specialties." cta="Discuss Your Specialty">
-      <div style={{display:"grid",gridTemplateColumns:cols(w,6,3,3),gap:8,marginBottom:12}}>
+    <ExpandSection id="specialties" dark label="Clinical Scope" title="Medical Specialties Supported" sub="Research methodology and manuscript support across all major medical specialties. Expand any specialty for a worked example." cta="Discuss Your Specialty">
+      <div style={{display:"grid",gridTemplateColumns:cols(w,4,3,2),gap:8,marginBottom:12}}>
         {specs.map((s,i)=>(
           <FI key={s.n} d={i*15}>
             <button onClick={()=>setOpen(open===i?null:i)} style={{width:"100%",background:open===i?TEAL:"rgba(255,255,255,.04)",border:`1px solid ${open===i?TEAL:"rgba(255,255,255,.09)"}`,borderRadius:10,padding:"11px 7px",cursor:"pointer",textAlign:"center",transition:"all .3s",WebkitTapHighlightColor:"transparent"}}>
               <div style={{fontSize:18,marginBottom:4}}>{s.i}</div>
-              <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:9,fontWeight:600,color:open===i?"white":"rgba(255,255,255,.6)",lineHeight:1.3}}>{s.n}</div>
+              <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:10,fontWeight:600,color:open===i?"white":"rgba(255,255,255,.6)",lineHeight:1.3}}>{s.n}</div>
             </button>
           </FI>
         ))}
       </div>
       {open!==null&&<FI>
-        <div style={{background:"rgba(255,255,255,.06)",border:"1px solid rgba(255,255,255,.14)",borderRadius:11,padding:"14px 18px",display:"flex",alignItems:"center",gap:12,flexWrap:"wrap"}}>
-          <span style={{fontSize:24}}>{specs[open].i}</span>
-          <div style={{flex:1,minWidth:200}}>
-            <div style={{color:"#34D399",fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:13,marginBottom:3}}>{specs[open].n}</div>
-            <div style={{color:"rgba(255,255,255,.55)",fontFamily:"'DM Sans',sans-serif",fontSize:12,lineHeight:1.6}}>{specs[open].d}</div>
+        <div style={{background:"rgba(255,255,255,.06)",border:"1px solid rgba(255,255,255,.14)",borderRadius:11,padding:"16px 18px"}}>
+          <div style={{display:"flex",alignItems:"center",gap:12,flexWrap:"wrap",marginBottom:10}}>
+            <span style={{fontSize:26}}>{specs[open].i}</span>
+            <div style={{flex:1,minWidth:200}}>
+              <div style={{color:"#34D399",fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:14,marginBottom:3}}>{specs[open].n}</div>
+              <div style={{color:"rgba(255,255,255,.55)",fontFamily:"'DM Sans',sans-serif",fontSize:12,lineHeight:1.6}}>{specs[open].d}</div>
+            </div>
+            <a href="#contact" style={{background:TEAL,color:"white",padding:"9px 14px",borderRadius:7,textDecoration:"none",fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:12,whiteSpace:"nowrap",minHeight:40,display:"flex",alignItems:"center"}}>Discuss →</a>
           </div>
-          <a href="#contact" style={{background:TEAL,color:"white",padding:"9px 14px",borderRadius:7,textDecoration:"none",fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:12,whiteSpace:"nowrap",minHeight:40,display:"flex",alignItems:"center"}}>Discuss →</a>
+          <div style={{background:"rgba(14,122,107,.12)",border:"1px solid rgba(14,122,107,.25)",borderRadius:8,padding:"10px 14px"}}>
+            <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:10,fontWeight:700,color:"#34D399",letterSpacing:1.5,textTransform:"uppercase",marginBottom:3}}>Example Project</div>
+            <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:12,color:"rgba(255,255,255,.75)",lineHeight:1.6}}>{specs[open].ex}</div>
+          </div>
         </div>
       </FI>}
       <div style={{marginTop:10,background:"rgba(14,122,107,.11)",border:"1px solid rgba(14,122,107,.22)",borderRadius:9,padding:"10px 14px",textAlign:"center"}}>
@@ -955,6 +964,650 @@ function SpecialtiesSection(){
     </ExpandSection>
   );
 }
+
+/* ════════════════════════════════════════════════════════════════
+   NEW COMPONENTS — Sample Deliverables Gallery, What You Send/Receive,
+   Publication Roadmap, Reviewer Response Showcase, Medical Specialties
+   (expanded), AI-Assisted Scientific Review (already exists as
+   AIQualitySection — enhanced separately)
+   ════════════════════════════════════════════════════════════════ */
+
+/* ── Sample Deliverables Gallery ─────────────────────────────────
+   Expandable cards built from DOCX Sections 1–8.
+   Reuses the diabetes mortality cohort dataset (n=184) throughout
+   for narrative consistency. */
+function DeliverablesGallery(){
+  const[open,setOpen]=useState(null);
+  const w=useW();
+
+  const cards=[
+    {
+      id:"raw-to-manuscript",
+      icon:"🔄",
+      title:"Raw Data → Cleaning → SPSS → Table → Manuscript",
+      sub:"The full analytical pipeline, one dataset, start to finish",
+      color:"#3B82F6",
+    },
+    {
+      id:"tlf-tables",
+      icon:"📋",
+      title:"Publication Tables (TLFs)",
+      sub:"Baseline characteristics, outcomes, regression, subgroups",
+      color:TEAL,
+    },
+    {
+      id:"prisma",
+      icon:"🔍",
+      title:"PRISMA Systematic Review",
+      sub:"PICO, search strategy, flow diagram, methods text",
+      color:"#7C3AED",
+    },
+    {
+      id:"forest",
+      icon:"🌲",
+      title:"Forest Plot Examples",
+      sub:"Primary meta-analysis & subgroup effect-modification plots",
+      color:"#16A34A",
+    },
+    {
+      id:"km",
+      icon:"📈",
+      title:"Kaplan–Meier Survival Analysis",
+      sub:"Survival curves, log-rank tests, Cox regression",
+      color:"#DB2777",
+    },
+    {
+      id:"thesis",
+      icon:"🎓",
+      title:"Thesis Development Workflow",
+      sub:"MD thesis chapters → journal manuscript conversion",
+      color:"#F59E0B",
+    },
+    {
+      id:"manuscript",
+      icon:"📄",
+      title:"Manuscript Development Workflow",
+      sub:"Abstract, Introduction, Methods, Results, Discussion",
+      color:"#0891B2",
+    },
+  ];
+
+  return(
+    <ExpandSection id="gallery" label="Sample Work" title="Sample Deliverables Gallery" sub="Real examples of how raw clinical data becomes publication-ready science. Expand any card to view a worked example." cta="Request Samples for Your Project">
+      <div style={{display:"flex",flexDirection:"column",gap:9}}>
+        {cards.map((c,i)=>(
+          <div key={c.id} style={{border:`1.5px solid ${open===i?c.color:"#E5E7EB"}`,borderRadius:12,overflow:"hidden",transition:"border-color .3s",background:"white"}}>
+            <button onClick={()=>setOpen(open===i?null:i)} style={{width:"100%",background:open===i?`${c.color}08`:"white",border:"none",padding:"14px 16px",display:"flex",justifyContent:"space-between",alignItems:"center",cursor:"pointer",textAlign:"left",gap:10,minHeight:56,WebkitTapHighlightColor:"transparent"}}>
+              <div style={{display:"flex",alignItems:"center",gap:12}}>
+                <div style={{width:36,height:36,borderRadius:10,background:`${c.color}18`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:17,flexShrink:0}}>{c.icon}</div>
+                <div style={{minWidth:0}}>
+                  <div style={{fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:13,color:NAVY,lineHeight:1.3}}>{c.title}</div>
+                  <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:11,color:"#6B7280",marginTop:2}}>{c.sub}</div>
+                </div>
+              </div>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style={{flexShrink:0,transform:open===i?"rotate(180deg)":"none",transition:"transform .3s"}}><path d="M6 9l6 6 6-6" stroke={open===i?c.color:"#9CA3AF"} strokeWidth="2" strokeLinecap="round"/></svg>
+            </button>
+            {open===i&&<div style={{padding:"0 16px 20px"}}>
+              {c.id==="raw-to-manuscript"&&<RawToManuscriptCard w={w}/>}
+              {c.id==="tlf-tables"&&<TLFTablesCard w={w}/>}
+              {c.id==="prisma"&&<PRISMACard w={w}/>}
+              {c.id==="forest"&&<ForestPlotCard w={w}/>}
+              {c.id==="km"&&<KaplanMeierCard w={w}/>}
+              {c.id==="thesis"&&<ThesisWorkflowCard w={w}/>}
+              {c.id==="manuscript"&&<ManuscriptWorkflowCard w={w}/>}
+            </div>}
+          </div>
+        ))}
+      </div>
+    </ExpandSection>
+  );
+}
+
+/* ---------- Card 1: Raw → Cleaning → SPSS → Table → Manuscript ---------- */
+function RawToManuscriptCard({w}){
+  const[step,setStep]=useState(0);
+  const steps=["Raw Data","Cleaning","SPSS Output","Pub. Table","Manuscript"];
+  return(
+    <div>
+      <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:12,color:"#6B7280",lineHeight:1.7,margin:"12px 0 14px"}}>
+        Based on a real consulting workflow: a prospective cohort study of 184 hospitalised patients with type 2 diabetes, examining predictors of 30-day mortality.
+      </p>
+      <div style={{display:"flex",gap:6,marginBottom:16,flexWrap:"wrap"}}>
+        {steps.map((s,i)=><button key={s} onClick={()=>setStep(i)} style={{background:step===i?NAVY:"white",color:step===i?"white":"#374151",border:`1.5px solid ${step===i?NAVY:"#E5E7EB"}`,borderRadius:100,padding:"7px 14px",fontSize:11,fontFamily:"'DM Sans',sans-serif",fontWeight:600,cursor:"pointer",minHeight:36,WebkitTapHighlightColor:"transparent"}}>{i+1}. {s}</button>)}
+      </div>
+
+      {step===0&&<div>
+        <div style={{background:"white",borderRadius:10,border:"1.5px solid #E5E7EB",overflow:"hidden"}}>
+          <div style={{background:NAVY,padding:"9px 14px"}}><span style={{color:"white",fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:11}}>Raw Clinical Dataset (Excerpt, n = 184)</span></div>
+          <div style={{overflowX:"auto",WebkitOverflowScrolling:"touch"}}>
+            <table style={{width:"100%",borderCollapse:"collapse",minWidth:480}}>
+              <thead><tr style={{background:"#F8FAFB"}}>{["Pt ID","Age","Sex","BMI","HTN","DM","Outcome"].map(h=><th key={h} style={{padding:"7px 10px",textAlign:"left",fontFamily:"'DM Sans',sans-serif",fontSize:10,fontWeight:700,color:NAVY,borderBottom:"2px solid #E5E7EB",whiteSpace:"nowrap"}}>{h}</th>)}</tr></thead>
+              <tbody>{[
+                ["PT-001","58","M","27.4","Yes","No","0 (Survived)"],
+                ["PT-002","72","F","31.2","Yes","Yes","1 (Deceased)"],
+                ["PT-003","45","M","23.8","No","No","0 (Survived)"],
+                ["PT-005","81","M","35.7","Yes","Yes","1 (Deceased)"],
+                ["…","…","…","…","…","…","…"],
+                ["PT-184","62","M","25.9","No","No","0 (Survived)"],
+              ].map((r,i)=><tr key={i} style={{background:i%2===0?"white":"#F8FAFB",borderBottom:"1px solid #F3F4F6"}}>{r.map((c,j)=><td key={j} style={{padding:"6px 10px",fontFamily:"'DM Sans',sans-serif",fontSize:11,color:"#374151",whiteSpace:"nowrap"}}>{c}</td>)}</tr>)}</tbody>
+            </table>
+          </div>
+        </div>
+        <div style={{marginTop:10,fontFamily:"'DM Sans',sans-serif",fontSize:11,color:"#6B7280",lineHeight:1.6}}>Full dataset: 184 consecutive admissions, General Medicine Ward, Jan–Dec 2022 — accepted in any format (Excel, SPSS, CSV).</div>
+      </div>}
+
+      {step===1&&<div style={{background:"#F8FAFB",borderRadius:10,border:"1.5px solid #E5E7EB",padding:"14px 16px"}}>
+        <div style={{fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:12,color:NAVY,marginBottom:10}}>Data Cleaning Checklist</div>
+        {[
+          "Missing data audit — 6 BMI values missing (3.3%); imputed using median of sex-matched subgroup",
+          "Outlier detection — Grubbs test applied; one extreme BMI (61.4) retained after clinical verification",
+          "Variable coding — Sex: Male=1, Female=0; Hypertension/Diabetes: Yes=1, No=0",
+          "Outcome variable confirmed binary (0/1); no partial events",
+          "Duplicate records checked — none identified",
+          "Final analytic dataset: n = 184 (0 excluded after cleaning)",
+        ].map((t,i)=><div key={i} style={{display:"flex",gap:8,padding:"6px 0",borderBottom:i<5?"1px solid #F3F4F6":"none"}}>
+          <div style={{width:18,height:18,borderRadius:"50%",background:"#DCFCE7",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,marginTop:1}}>
+            <svg width="9" height="9" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#16A34A" strokeWidth="3" strokeLinecap="round"/></svg>
+          </div>
+          <span style={{fontFamily:"'DM Sans',sans-serif",fontSize:12,color:"#374151",lineHeight:1.6}}>{t}</span>
+        </div>)}
+      </div>}
+
+      {step===2&&<div>
+        <div style={{background:"white",borderRadius:10,border:"1.5px solid #E5E7EB",overflow:"hidden",marginBottom:10}}>
+          <div style={{background:NAVY,padding:"9px 14px",display:"flex",justifyContent:"space-between",flexWrap:"wrap",gap:4}}><span style={{color:"white",fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:11}}>Raw SPSS Output — Variables in the Equation</span><span style={{color:"rgba(255,255,255,.3)",fontSize:10,fontFamily:"'DM Sans',sans-serif"}}>As received from software</span></div>
+          <div style={{background:"#1E1E2E",padding:"12px 14px",fontFamily:"monospace",fontSize:10,color:"#A6E3A1",lineHeight:1.9,overflowX:"auto"}}>
+            <div style={{color:"#89B4FA"}}>Variables in the Equation — Step 1a</div>
+            <div>Age&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B=.074&nbsp; SE=.018&nbsp; Wald=16.890&nbsp; Sig.=.000&nbsp; Exp(B)=1.077</div>
+            <div>Sex(1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B=.412&nbsp; SE=.228&nbsp; Wald=3.270&nbsp;&nbsp; Sig.=.071&nbsp; Exp(B)=1.510</div>
+            <div>BMI&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B=.063&nbsp; SE=.029&nbsp; Wald=4.710&nbsp;&nbsp; Sig.=.030&nbsp; Exp(B)=1.065</div>
+            <div>HTN(1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B=.847&nbsp; SE=.291&nbsp; Wald=8.460&nbsp;&nbsp; Sig.=.004&nbsp; Exp(B)=2.333</div>
+            <div>DM(1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;B=1.024 SE=.318&nbsp; Wald=10.370 Sig.=.001&nbsp; Exp(B)=2.784</div>
+            <div style={{color:"#F38BA8"}}>Constant&nbsp;&nbsp;&nbsp;&nbsp; B=-6.312 SE=.981&nbsp; Wald=41.450 Sig.=.000&nbsp; Exp(B)=.002</div>
+          </div>
+          <div style={{padding:"8px 14px",background:"#F8FAFB",borderTop:"1px solid #E5E7EB"}}><span style={{fontFamily:"'DM Sans',sans-serif",fontSize:10,color:"#6B7280"}}>SPSS v27.0. Nagelkerke R² = 0.341. Hosmer–Lemeshow χ²(8)=6.24, p=.620. Model χ²(5)=47.82, p&lt;.001.</span></div>
+        </div>
+        <div style={{background:"#FEF3C7",borderRadius:8,padding:"10px 14px"}}>
+          <span style={{fontFamily:"'DM Sans',sans-serif",fontSize:11,color:"#92400E",fontWeight:600}}>✦ This raw output is unusable for direct manuscript inclusion — no journal compliance, machine notation only.</span>
+        </div>
+      </div>}
+
+      {step===3&&<div>
+        <div style={{background:"white",borderRadius:10,border:"1.5px solid #E5E7EB",overflow:"hidden"}}>
+          <div style={{background:NAVY,padding:"9px 14px",display:"flex",justifyContent:"space-between",flexWrap:"wrap",gap:4}}><span style={{color:"white",fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:11}}>Table 3. Multivariable Logistic Regression — Predictors of 30-Day Mortality</span><span style={{color:"rgba(255,255,255,.3)",fontSize:10,fontFamily:"'DM Sans',sans-serif"}}>Journal Format</span></div>
+          <div style={{overflowX:"auto",WebkitOverflowScrolling:"touch"}}>
+            <table style={{width:"100%",borderCollapse:"collapse",minWidth:380}}>
+              <thead><tr style={{background:"#F8FAFB"}}>{["Predictor Variable","Adj. OR (95% CI)","P-value"].map(h=><th key={h} style={{padding:"8px 12px",textAlign:h==="Predictor Variable"?"left":"center",fontFamily:"'DM Sans',sans-serif",fontSize:11,fontWeight:700,color:NAVY,borderBottom:"2px solid #E5E7EB",whiteSpace:"nowrap"}}>{h}</th>)}</tr></thead>
+              <tbody>{[
+                ["Age (per year)","1.08 (1.04–1.12)","<0.001",true],
+                ["Male sex","1.46 (0.93–2.31)","0.099",false],
+                ["BMI (per unit)","1.07 (1.01–1.13)","0.030",true],
+                ["Hypertension","2.33 (1.32–4.13)","0.004",true],
+                ["Diabetes mellitus","2.78 (1.49–5.20)","0.001",true],
+                ["eGFR <60 ml/min","2.11 (1.08–4.13)","0.029",true],
+              ].map((r,i)=><tr key={i} style={{background:i%2===0?"white":"#F8FAFB",borderBottom:"1px solid #F3F4F6"}}>
+                <td style={{padding:"8px 12px",fontFamily:"'DM Sans',sans-serif",fontSize:12,color:"#374151",fontWeight:500}}>{r[0]}</td>
+                <td style={{padding:"8px 12px",textAlign:"center",fontFamily:"'DM Sans',sans-serif",fontSize:12,color:"#374151"}}>{r[1]}</td>
+                <td style={{padding:"8px 12px",textAlign:"center"}}><span style={{fontFamily:"'DM Sans',sans-serif",fontSize:12,fontWeight:r[3]?700:400,color:r[3]?TEAL:"#6B7280"}}>{r[2]}</span></td>
+              </tr>)}</tbody>
+            </table>
+          </div>
+          <div style={{padding:"8px 14px",background:"#F8FAFB",borderTop:"1px solid #E5E7EB"}}><span style={{fontFamily:"'DM Sans',sans-serif",fontSize:10,color:"#6B7280"}}>OR = Odds Ratio; CI = Confidence Interval. Nagelkerke R² = 0.341. Reference: Female sex; No hypertension; No diabetes; eGFR ≥60.</span></div>
+        </div>
+      </div>}
+
+      {step===4&&<div style={{background:LT,border:`1.5px solid ${TEAL}40`,borderRadius:10,padding:"16px 18px"}}>
+        <div style={{fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:12,color:NAVY,marginBottom:8}}>✦ Manuscript Results Text</div>
+        <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:12,color:"#1F4E42",lineHeight:1.85,margin:0,fontStyle:"italic",background:"white",padding:"14px 16px",borderRadius:8,border:"1px solid rgba(14,122,107,.2)"}}>
+          On multivariable binary logistic regression, five variables independently predicted 30-day mortality: increasing age (adjusted OR 1.08, 95% CI 1.04–1.12; p &lt; 0.001), hypertension (adjusted OR 2.33, 95% CI 1.32–4.13; p = 0.004), diabetes mellitus comorbidity (adjusted OR 2.78, 95% CI 1.49–5.20; p = 0.001), higher BMI (adjusted OR 1.07 per unit, 95% CI 1.01–1.13; p = 0.030), and eGFR &lt;60 ml/min (adjusted OR 2.11, 95% CI 1.08–4.13; p = 0.029). The model demonstrated good calibration (Hosmer–Lemeshow p = 0.620) and explained 34.1% of variance (Nagelkerke R² = 0.341).
+        </p>
+        <div style={{marginTop:10}}><span style={{background:"white",color:TEAL,fontFamily:"'DM Sans',sans-serif",fontSize:11,fontWeight:700,padding:"4px 10px",borderRadius:100,border:`1px solid ${TEAL}40`}}>Drops directly into your Results section</span></div>
+      </div>}
+    </div>
+  );
+}
+
+/* ---------- Card 2: Publication Tables (TLFs) ---------- */
+function TLFTablesCard({w}){
+  const[tab,setTab]=useState(0);
+  const tabs=["Table 1: Baseline","Table 2: Outcomes","Table 4: Subgroups","Table 5: Adverse Events"];
+  return(
+    <div>
+      <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:12,color:"#6B7280",lineHeight:1.7,margin:"12px 0 14px"}}>Every research manuscript or thesis is delivered with a standard suite of ICMJE/Vancouver-compliant tables, each with a written interpretation.</p>
+      <div style={{display:"flex",gap:6,marginBottom:14,flexWrap:"wrap"}}>
+        {tabs.map((t,i)=><button key={t} onClick={()=>setTab(i)} style={{background:tab===i?NAVY:"white",color:tab===i?"white":"#374151",border:`1.5px solid ${tab===i?NAVY:"#E5E7EB"}`,borderRadius:100,padding:"7px 14px",fontSize:11,fontFamily:"'DM Sans',sans-serif",fontWeight:600,cursor:"pointer",minHeight:36,WebkitTapHighlightColor:"transparent"}}>{t}</button>)}
+      </div>
+
+      {tab===0&&<TableBlock title="Table 1. Baseline Characteristics" cols={["Characteristic","Survivors (n=146)","Non-Survivors (n=38)","P-value"]} rows={[
+        ["Age, years — mean (SD)","60.9 (11.2)","73.2 (9.4)","<0.001",true],
+        ["Male sex — n (%)","77 (52.7%)","23 (60.5%)","0.382",false],
+        ["BMI, kg/m² — mean (SD)","26.8 (4.1)","30.2 (4.8)","<0.001",true],
+        ["Hypertension — n (%)","71 (48.6%)","30 (78.9%)","<0.001",true],
+        ["Diabetes mellitus — n (%)","42 (28.8%)","22 (57.9%)","0.001",true],
+        ["eGFR <60 ml/min — n (%)","33 (22.6%)","19 (50.0%)","0.001",true],
+        ["Haemoglobin, g/dL — mean (SD)","12.8 (2.1)","11.2 (2.4)","<0.001",true],
+      ]} note="Data presented as mean (SD) or n (%). P-values from independent t-test or chi-square." interp="Patients who died within 30 days were significantly older, had higher BMI, and a substantially greater burden of comorbidity compared to survivors."/>}
+
+      {tab===1&&<TableBlock title="Table 2. Primary Outcome Analysis" cols={["Outcome Measure","Survivors (n=146)","Non-Survivors (n=38)","P-value"]} rows={[
+        ["ICU admission — n (%)","18 (12.3%)","29 (76.3%)","<0.001",true],
+        ["Mechanical ventilation — n (%)","4 (2.7%)","21 (55.3%)","<0.001",true],
+        ["Hospital LOS, days — median (IQR)","5 (3–8)","14 (8–22)","<0.001",true],
+        ["Readmission at 30 days — n (%)","22 (15.1%)","N/A","—",false],
+      ]} note="LOS = Length of Stay. Hospital LOS compared by Mann-Whitney U test." interp="Non-survivors had markedly worse outcomes: 76.3% required ICU admission vs. 12.3% of survivors, and hospital stay was nearly three times longer (median 14 vs. 5 days)."/>}
+
+      {tab===2&&<TableBlock title="Table 4. Pre-Specified Subgroup Analysis" cols={["Subgroup","n","Adj. OR","95% CI","P-int."]} rows={[
+        ["Age < 65 years","98","1.92","0.88–4.18","0.043",false],
+        ["Age ≥ 65 years","86","3.84","1.72–8.56","—",true],
+        ["Male sex","100","2.94","1.38–6.27","0.312",false],
+        ["Female sex","84","2.51","0.98–6.44","—",false],
+      ]} note="P-interaction tests for effect modification via likelihood ratio test. Pre-specified in the SAP." interp="A significant interaction was found between age group and mortality risk (p-interaction = 0.043) — older patients (≥65) had a much higher adjusted OR (3.84) than younger patients (1.92)."/>}
+
+      {tab===3&&<TableBlock title="Table 5. Adverse Events Summary" cols={["Adverse Event","All Patients (n=184)","Grade ≥3 — n (%)"]} rows={[
+        ["Any adverse event","102 (55.4%)","41 (22.3%)",false],
+        ["Acute kidney injury","48 (26.1%)","14 (7.6%)",true],
+        ["Hypotension","37 (20.1%)","9 (4.9%)",false],
+        ["Nosocomial infection","29 (15.8%)","8 (4.3%)",false],
+        ["Death (30-day)","38 (20.7%)","38 (20.7%)",true],
+      ]} note="Classified per CTCAE v5.0. Grade ≥3 = severe, life-threatening, or fatal." interp="Adverse events occurred in over half of all patients. Acute kidney injury was the most frequent complication (26.1%), with 7.6% classified as severe."/>}
+    </div>
+  );
+}
+function TableBlock({title,cols,rows,note,interp}){
+  return(
+    <div>
+      <div style={{background:"white",borderRadius:10,border:"1.5px solid #E5E7EB",overflow:"hidden"}}>
+        <div style={{background:NAVY,padding:"9px 14px"}}><span style={{color:"white",fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:11}}>{title}</span></div>
+        <div style={{overflowX:"auto",WebkitOverflowScrolling:"touch"}}>
+          <table style={{width:"100%",borderCollapse:"collapse",minWidth:380}}>
+            <thead><tr style={{background:"#F8FAFB"}}>{cols.map((h,i)=><th key={h} style={{padding:"8px 12px",textAlign:i===0?"left":"center",fontFamily:"'DM Sans',sans-serif",fontSize:11,fontWeight:700,color:NAVY,borderBottom:"2px solid #E5E7EB",whiteSpace:"nowrap"}}>{h}</th>)}</tr></thead>
+            <tbody>{rows.map((r,i)=>{
+              const sig=r[r.length-1];
+              const vals=r.slice(0,-1);
+              return<tr key={i} style={{background:i%2===0?"white":"#F8FAFB",borderBottom:"1px solid #F3F4F6"}}>
+                {vals.map((c,j)=><td key={j} style={{padding:"7px 12px",textAlign:j===0?"left":"center",fontFamily:"'DM Sans',sans-serif",fontSize:12,color:j===vals.length-1&&sig?TEAL:"#374151",fontWeight:j===0?500:(j===vals.length-1&&sig?700:400),whiteSpace:"nowrap"}}>{c}</td>)}
+              </tr>;
+            })}</tbody>
+          </table>
+        </div>
+        <div style={{padding:"8px 14px",background:"#F8FAFB",borderTop:"1px solid #E5E7EB"}}><span style={{fontFamily:"'DM Sans',sans-serif",fontSize:10,color:"#6B7280"}}>{note}</span></div>
+      </div>
+      <div style={{marginTop:10,background:LT,border:`1px solid ${TEAL}40`,borderRadius:8,padding:"10px 14px"}}>
+        <div style={{fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:11,color:NAVY,marginBottom:4}}>Interpretation</div>
+        <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:12,color:"#1F4E42",lineHeight:1.7}}>{interp}</div>
+      </div>
+    </div>
+  );
+}
+
+/* ---------- Card 3: PRISMA Systematic Review ---------- */
+function PRISMACard({w}){
+  return(
+    <div>
+      <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:12,color:"#6B7280",lineHeight:1.7,margin:"12px 0 14px"}}>Example: a PRISMA 2020-compliant systematic review and meta-analysis of SGLT-2 inhibitors and cardiovascular outcomes in type 2 diabetes.</p>
+      <div style={{background:"#F8FAFB",border:"1.5px solid #E5E7EB",borderRadius:10,padding:"14px 16px",marginBottom:12}}>
+        <div style={{fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:12,color:NAVY,marginBottom:8}}>PICO Framework</div>
+        {[["P","Population","Adults (≥18) with type 2 diabetes mellitus"],["I","Intervention","SGLT-2 inhibitor therapy"],["C","Comparator","Placebo or active comparator (GLP-1 agonist)"],["O","Outcome","Major adverse cardiovascular events (MACE)"]].map(([l,t,d])=>(
+          <div key={l} style={{display:"flex",gap:10,padding:"6px 0",borderBottom:"1px solid #F3F4F6"}}>
+            <div style={{width:22,height:22,borderRadius:6,background:`${"#7C3AED"}18`,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}><span style={{fontFamily:"'DM Sans',sans-serif",fontWeight:800,fontSize:11,color:"#7C3AED"}}>{l}</span></div>
+            <div><span style={{fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:12,color:NAVY}}>{t}: </span><span style={{fontFamily:"'DM Sans',sans-serif",fontSize:12,color:"#374151"}}>{d}</span></div>
+          </div>
+        ))}
+      </div>
+
+      {/* Flow funnel */}
+      <div style={{fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:12,color:NAVY,marginBottom:8}}>PRISMA 2020 Flow Diagram</div>
+      <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:0,marginBottom:12}}>
+        {[
+          {n:"1,806",l:"Records identified",s:"PubMed 847 · Embase 612 · CENTRAL 203 · CINAHL 144",c:"#3B82F6"},
+          {n:"1,241",l:"After duplicates removed",s:"565 duplicates removed",c:"#F59E0B"},
+          {n:"254",l:"Full texts assessed",s:"987 excluded at title/abstract",c:"#7C3AED"},
+          {n:"35",l:"Studies in meta-analysis",s:"219 excluded after full-text (wrong population/intervention/outcome)",c:"#16A34A"},
+        ].map((b,i,arr)=>(
+          <div key={b.l} style={{width:"100%",display:"flex",flexDirection:"column",alignItems:"center"}}>
+            <div style={{width:"100%",background:"white",border:`2px solid ${b.c}40`,borderRadius:10,padding:"9px 13px",display:"flex",alignItems:"center",gap:11}}>
+              <div style={{width:48,height:36,borderRadius:8,background:`${b.c}18`,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}><span style={{fontFamily:"'DM Sans',sans-serif",fontSize:12,fontWeight:800,color:b.c}}>{b.n}</span></div>
+              <div><div style={{fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:12,color:NAVY}}>{b.l}</div><div style={{fontFamily:"'DM Sans',sans-serif",fontSize:10,color:"#6B7280"}}>{b.s}</div></div>
+            </div>
+            {i<arr.length-1&&<div style={{width:2,height:14,background:"#E5E7EB"}}/>}
+          </div>
+        ))}
+      </div>
+
+      <div style={{background:LT,border:`1px solid ${TEAL}40`,borderRadius:8,padding:"10px 14px"}}>
+        <div style={{fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:11,color:NAVY,marginBottom:4}}>Methods Text Excerpt</div>
+        <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:12,color:"#1F4E42",lineHeight:1.7,fontStyle:"italic"}}>Two independent reviewers screened all titles/abstracts using Covidence software (Cohen's kappa = 0.87 for full-text agreement). Disagreements were resolved by a third reviewer.</div>
+      </div>
+    </div>
+  );
+}
+
+/* ---------- Card 4: Forest Plot Examples ---------- */
+function ForestPlotCard({w}){
+  const studies=[
+    {l:"EMPA-REG OUTCOME (2015)",or:0.86,lo:0.74,hi:0.99,wt:18.4},
+    {l:"CANVAS Program (2017)",or:0.86,lo:0.75,hi:0.97,wt:19.8},
+    {l:"DECLARE–TIMI 58 (2019)",or:0.93,lo:0.84,hi:1.03,wt:22.1},
+    {l:"CREDENCE (2019)",or:0.74,lo:0.60,hi:0.91,wt:12.6},
+    {l:"SCORED (2020)",or:0.77,lo:0.65,hi:0.91,wt:13.2},
+    {l:"SOLOIST-WHF (2020)",or:0.67,lo:0.52,hi:0.89,wt:8.6},
+    {l:"EMPEROR-Reduced (2020)",or:0.75,lo:0.62,hi:0.90,wt:5.3},
+  ];
+  const sc=v=>40+(Math.log(v)-Math.log(0.4))/(Math.log(2.2)-Math.log(0.4))*380;
+  return(
+    <div>
+      <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:12,color:"#6B7280",lineHeight:1.7,margin:"12px 0 14px"}}>Forest plots produced in R (meta/metafor) or RevMan 5.4, delivered at 300 DPI (TIFF/EPS) — journal submission ready.</p>
+      <div style={{background:"white",borderRadius:10,border:"1.5px solid #E5E7EB",overflow:"hidden"}}>
+        <div style={{background:NAVY,padding:"9px 14px"}}><span style={{color:"white",fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:11}}>Figure 1. SGLT-2 Inhibitors vs. MACE — Primary Meta-Analysis</span></div>
+        <div style={{padding:"16px",overflowX:"auto",WebkitOverflowScrolling:"touch"}}>
+          <svg viewBox="0 0 480 260" style={{width:"100%",maxHeight:260,minWidth:340}}>
+            <line x1={sc(1)} y1="10" x2={sc(1)} y2="240" stroke="#D1D5DB" strokeWidth="1" strokeDasharray="4,4"/>
+            {studies.map((s,i)=>{
+              const y=30+i*28;
+              return<g key={s.l}>
+                <text x="5" y={y+4} fontSize="9" fill="#374151" fontFamily="DM Sans">{s.l}</text>
+                <line x1={sc(s.lo)} y1={y} x2={sc(s.hi)} y2={y} stroke={TEAL} strokeWidth="1.5"/>
+                <rect x={sc(s.or)-4} y={y-4} width={8} height={8} fill={TEAL} rx="2"/>
+                <text x="430" y={y+4} fontSize="8" fill="#6B7280" fontFamily="DM Sans">{s.or.toFixed(2)}</text>
+              </g>;
+            })}
+            {/* pooled diamond */}
+            <polygon points={`${sc(0.84)-14},236 ${sc(0.84)},230 ${sc(0.84)+14},236 ${sc(0.84)},242`} fill="#16A34A"/>
+            <text x="5" y="240" fontSize="9" fontWeight="700" fill="#16A34A" fontFamily="DM Sans">Pooled (Random Effects)</text>
+            <text x="430" y="240" fontSize="8" fontWeight="700" fill="#16A34A" fontFamily="DM Sans">0.84</text>
+            <text x={sc(0.4)} y="255" fontSize="9" fill="#6B7280" fontFamily="DM Sans">Favours SGLT-2i</text>
+            <text x={sc(1.6)} y="255" fontSize="9" fill="#6B7280" fontFamily="DM Sans" textAnchor="end">Favours Placebo</text>
+          </svg>
+        </div>
+        <div style={{padding:"10px 14px",borderTop:"1px solid #E5E7EB",background:"#F8FAFB"}}>
+          <span style={{fontFamily:"'DM Sans',sans-serif",fontSize:11,color:"#4B5563"}}>Pooled OR = 0.84 (95% CI 0.79–0.90); I² = 24.3% (p-heterogeneity = 0.26); Egger's test p = 0.41 (no publication bias).</span>
+        </div>
+      </div>
+      <div style={{marginTop:10,background:LT,border:`1px solid ${TEAL}40`,borderRadius:8,padding:"10px 14px"}}>
+        <div style={{fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:11,color:NAVY,marginBottom:4}}>Subgroup Analysis Available</div>
+        <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:12,color:"#1F4E42",lineHeight:1.7}}>A second forest plot stratified by baseline HbA1c showed a significant interaction (p = 0.031): patients with HbA1c ≥8.0% had greater benefit (pooled OR 0.81) than those &lt;8.0% (pooled OR 0.94).</div>
+      </div>
+    </div>
+  );
+}
+
+/* ---------- Card 5: Kaplan-Meier ---------- */
+function KaplanMeierCard({w}){
+  return(
+    <div>
+      <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:12,color:"#6B7280",lineHeight:1.7,margin:"12px 0 14px"}}>Kaplan–Meier curves and Cox proportional hazards models produced in SPSS, R (survival/survminer) or Stata — fully customised colour, font, and at-risk tables.</p>
+      <div style={{background:"white",borderRadius:10,border:"1.5px solid #E5E7EB",overflow:"hidden"}}>
+        <div style={{background:NAVY,padding:"9px 14px"}}><span style={{color:"white",fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:11}}>Figure 3. Overall Survival by Hypertension Status</span></div>
+        <div style={{padding:"16px",overflowX:"auto",WebkitOverflowScrolling:"touch"}}>
+          <svg viewBox="0 0 460 220" style={{width:"100%",maxHeight:220,minWidth:320}}>
+            <line x1="45" y1="10" x2="45" y2="190" stroke="#D1D5DB" strokeWidth="1.5"/>
+            <line x1="45" y1="190" x2="440" y2="190" stroke="#D1D5DB" strokeWidth="1.5"/>
+            {[0,0.2,0.4,0.6,0.8,1.0].map((v,i)=><text key={v} x="38" y={193-i*36} textAnchor="end" fontSize="9" fill="#9CA3AF" fontFamily="DM Sans">{v.toFixed(1)}</text>)}
+            <polyline points="45,10 120,28 180,52 230,72 290,92 360,112 440,128" fill="none" stroke={TEAL} strokeWidth="2.5" strokeLinejoin="round"/>
+            <polyline points="45,10 110,42 165,82 215,118 270,148 330,168 440,182" fill="none" stroke="#EF4444" strokeWidth="2.5" strokeDasharray="6,3" strokeLinejoin="round"/>
+            <rect x="280" y="20" width="155" height="48" rx="5" fill="white" stroke="#E5E7EB"/>
+            <line x1="288" y1="36" x2="312" y2="36" stroke={TEAL} strokeWidth="2.5"/><text x="318" y="40" fontSize="10" fill="#374151" fontFamily="DM Sans">No Hypertension (n=100)</text>
+            <line x1="288" y1="52" x2="312" y2="52" stroke="#EF4444" strokeWidth="2.5" strokeDasharray="5,3"/><text x="318" y="56" fontSize="10" fill="#374151" fontFamily="DM Sans">Hypertension (n=84)</text>
+            <text x="240" y="205" textAnchor="middle" fontSize="10" fill="#6B7280" fontFamily="DM Sans">Time (months) — 0 to 36</text>
+          </svg>
+        </div>
+        <div style={{padding:"10px 14px",borderTop:"1px solid #E5E7EB",background:"#F8FAFB"}}>
+          <span style={{fontFamily:"'DM Sans',sans-serif",fontSize:11,color:"#4B5563"}}>Log-rank χ²(1) = 8.47, p = 0.004. Median survival: 34.8 months (no HTN) vs. 26.2 months (HTN).</span>
+        </div>
+      </div>
+      <div style={{display:"grid",gridTemplateColumns:w>=560?"1fr 1fr":"1fr",gap:8,marginTop:10}}>
+        <div style={{background:"#F8FAFB",border:"1.5px solid #E5E7EB",borderRadius:8,padding:"10px 14px"}}>
+          <div style={{fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:11,color:NAVY,marginBottom:4}}>Cox Regression (Adjusted)</div>
+          <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:12,color:"#374151"}}>HR 1.62 (95% CI 1.05–2.50); p = 0.029 — adjusted for age, sex, BMI, diabetes.</div>
+        </div>
+        <div style={{background:LT,border:`1px solid ${TEAL}40`,borderRadius:8,padding:"10px 14px"}}>
+          <div style={{fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:11,color:NAVY,marginBottom:4}}>Proportional Hazards</div>
+          <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:12,color:"#1F4E42"}}>Confirmed by Schoenfeld residuals (global test p = 0.43).</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ---------- Card 6: Thesis Development Workflow ---------- */
+function ThesisWorkflowCard({w}){
+  const[step,setStep]=useState(0);
+  const chapters=[
+    {n:"Ch.1",t:"Background",d:"Knowledge gap framed against current literature — T2DM epidemiology, prior LMIC evidence gaps."},
+    {n:"Ch.2",t:"Objectives",d:"Primary: identify independent predictors of 30-day mortality. 4 secondary objectives defined."},
+    {n:"Ch.3",t:"Methodology",d:"Study design, setting, sample size (G*Power: n=230 with attrition), full Statistical Analysis Plan."},
+    {n:"Ch.4",t:"SAP",d:"Primary analysis: binary logistic regression. Secondary: KM survival, Cox regression. Software specified."},
+    {n:"Ch.5",t:"Results",d:"184/230 patients completed follow-up. Tables 1–5 with full statistical output."},
+    {n:"Ch.6",t:"Discussion",d:"Five independent predictors discussed against mechanistic and registry evidence."},
+    {n:"Ch.7",t:"Conclusion",d:"20.7% mortality; risk score AUROC 0.81 (95% CI 0.74–0.88); validation recommended."},
+  ];
+  return(
+    <div>
+      <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:12,color:"#6B7280",lineHeight:1.7,margin:"12px 0 14px"}}>Example: an MD thesis — "Predictors of 30-Day Mortality in Hospitalised Patients with Type 2 Diabetes Mellitus" — built chapter by chapter, then converted into a journal manuscript.</p>
+      <div style={{display:"grid",gridTemplateColumns:cols(w,4,3,2),gap:7,marginBottom:14}}>
+        {chapters.map((c,i)=>(
+          <button key={c.n} onClick={()=>setStep(i)} style={{background:step===i?NAVY:"white",border:`1.5px solid ${step===i?NAVY:"#E5E7EB"}`,borderRadius:9,padding:"9px 7px",cursor:"pointer",textAlign:"center",WebkitTapHighlightColor:"transparent"}}>
+            <div style={{fontFamily:"'DM Sans',sans-serif",fontWeight:800,fontSize:10,color:step===i?"#34D399":TEAL}}>{c.n}</div>
+            <div style={{fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:10,color:step===i?"white":NAVY,marginTop:2}}>{c.t}</div>
+          </button>
+        ))}
+      </div>
+      <div style={{background:"#F8FAFB",border:"1.5px solid #E5E7EB",borderRadius:10,padding:"14px 16px",marginBottom:14}}>
+        <div style={{fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:12,color:NAVY,marginBottom:6}}>{chapters[step].n} — {chapters[step].t}</div>
+        <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:12,color:"#4B5563",lineHeight:1.7}}>{chapters[step].d}</div>
+      </div>
+
+      <div style={{fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:12,color:NAVY,marginBottom:8}}>Thesis → Journal Manuscript Conversion</div>
+      <div style={{display:"flex",flexDirection:"column",gap:6}}>
+        {[["Chapter 1: Background","Introduction","Condensed to 3–4 paragraphs; focus on knowledge gap"],["Chapter 3: Methodology","Methods","Present tense; sufficient detail for replication"],["Chapter 5: Results","Results","Tables 1–5 retained; narrative condensed"],["Chapter 6: Discussion","Discussion","3–4 key findings + limitations paragraph"],["Chapter 7: Conclusion","Conclusion","2–3 sentences with clinical implications"]].map(([from,to,note])=>(
+          <div key={from} style={{display:"flex",alignItems:"center",gap:8,background:"white",border:"1px solid #E5E7EB",borderRadius:8,padding:"8px 12px",flexWrap:"wrap"}}>
+            <span style={{fontFamily:"'DM Sans',sans-serif",fontSize:11,fontWeight:600,color:"#374151",minWidth:130}}>{from}</span>
+            <span style={{color:TEAL,fontSize:13}}>→</span>
+            <span style={{fontFamily:"'DM Sans',sans-serif",fontSize:11,fontWeight:700,color:NAVY,minWidth:80}}>{to}</span>
+            <span style={{fontFamily:"'DM Sans',sans-serif",fontSize:11,color:"#6B7280",flex:1}}>{note}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ---------- Card 7: Manuscript Development Workflow ---------- */
+function ManuscriptWorkflowCard({w}){
+  const[open,setOpen]=useState(null);
+  const sections=[
+    {t:"Abstract",icon:"📄",c:"#3B82F6",content:"BACKGROUND: Hospitalisation in T2DM patients is associated with elevated short-term mortality... METHODS: Prospective cohort, 184 patients... RESULTS: 38 (20.7%) died within 30 days; age, hypertension, and diabetes independently predicted mortality (all p<0.05). CONCLUSIONS: 30-day mortality was 20.7%. Early identification of high-risk patients may reduce preventable deaths."},
+    {t:"Introduction",icon:"📖",c:TEAL,content:"T2DM affects 537 million adults worldwide with prevalence projected to reach 783 million by 2045. Patients with T2DM are hospitalised at 2–3-fold higher rates, yet data on independent predictors of short-term mortality from LMIC settings remain limited. This study aimed to identify independent predictors of 30-day mortality in hospitalised T2DM patients."},
+    {t:"Methods",icon:"🔬",c:"#7C3AED",content:"A prospective cohort study was conducted at a 1,200-bed tertiary care institution (Jan–Dec 2022). Consecutive T2DM patients ≥18 years were enrolled. Data analysed using SPSS v27.0; binary logistic regression with forward stepwise selection identified independent predictors of 30-day mortality (p<0.05)."},
+    {t:"Results",icon:"📊",c:"#F59E0B",content:"230 enrolled; 184 completed follow-up. Mean age 63.4±11.7 years; 54.3% male. 30-day mortality: 38 (20.7%, 95% CI 14.9–26.5%). Five variables independently predicted mortality: age (aOR 1.08), hypertension (aOR 2.33), diabetes (aOR 2.78), BMI (aOR 1.07), eGFR<60 (aOR 2.11)."},
+    {t:"Discussion",icon:"💡",c:"#16A34A",content:"30-day mortality (20.7%) is consistent with published LMIC estimates. Hypertension's independent association (aOR 2.33) aligns with mechanistic evidence of end-organ damage and accelerated atherosclerosis — comparable to registry studies reporting OR 1.8–2.5."},
+  ];
+  return(
+    <div>
+      <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:12,color:"#6B7280",lineHeight:1.7,margin:"12px 0 14px"}}>A complete, ICMJE-formatted IMRAD manuscript — submission-ready for PubMed-indexed journals. Expand each section to see writing style and structure.</p>
+      <div style={{background:NAVY,borderRadius:10,padding:"14px 16px",marginBottom:12}}>
+        <div style={{color:"rgba(255,255,255,.4)",fontFamily:"'DM Sans',sans-serif",fontSize:10,letterSpacing:1.5,textTransform:"uppercase",marginBottom:4}}>Sample Manuscript Title</div>
+        <div style={{color:"white",fontFamily:"'Playfair Display',serif",fontSize:14,fontWeight:700,lineHeight:1.5}}>"Independent Predictors of 30-Day Mortality in Hospitalised Patients with Type 2 Diabetes Mellitus: A Prospective Cohort Study"</div>
+      </div>
+      <div style={{display:"flex",flexDirection:"column",gap:8}}>
+        {sections.map((s,i)=>(
+          <div key={s.t} style={{border:`1.5px solid ${open===i?s.c:"#E5E7EB"}`,borderRadius:10,overflow:"hidden",transition:"border-color .3s"}}>
+            <button onClick={()=>setOpen(open===i?null:i)} style={{width:"100%",background:open===i?`${s.c}08`:"white",border:"none",padding:"11px 14px",display:"flex",justifyContent:"space-between",alignItems:"center",cursor:"pointer",textAlign:"left",gap:8,minHeight:48,WebkitTapHighlightColor:"transparent"}}>
+              <div style={{display:"flex",alignItems:"center",gap:9}}><span style={{fontSize:16}}>{s.icon}</span><span style={{fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:12,color:NAVY}}>{s.t}</span></div>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" style={{transform:open===i?"rotate(180deg)":"none",transition:"transform .3s"}}><path d="M6 9l6 6 6-6" stroke={open===i?s.c:"#9CA3AF"} strokeWidth="2" strokeLinecap="round"/></svg>
+            </button>
+            {open===i&&<div style={{padding:"0 14px 14px",fontFamily:"'DM Sans',sans-serif",fontSize:12,color:"#4B5563",lineHeight:1.8}}>{s.content}</div>}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ════════════════════════════════════════════════════════════════
+   What You Send → What You Receive
+   ════════════════════════════════════════════════════════════════ */
+function SendReceive(){
+  const w=useW();
+  const pairs=[
+    {icon:"📁",send:"Raw Excel Dataset",sendSub:"Patient records, any format",arrow:"→",receive:["Cleaned & validated data","Full statistical analysis","Publication-ready tables & figures","Complete manuscript"],color:"#3B82F6"},
+    {icon:"💡",send:"Research Idea",sendSub:"A clinical question or hypothesis",arrow:"→",receive:["Full study protocol","Methodology & study design","Statistical Analysis Plan","IRB-ready documentation"],color:TEAL},
+    {icon:"🎓",send:"Thesis Topic",sendSub:"Title or area of interest",arrow:"→",receive:["Complete thesis (all chapters)","Statistical analysis & tables","Journal manuscript conversion","Formatted bibliography"],color:"#7C3AED"},
+    {icon:"📨",send:"Reviewer Comments",sendSub:"Peer review feedback on submission",arrow:"→",receive:["Point-by-point response letter","Revised manuscript (tracked changes)","Updated tables/figures","Resubmission cover letter"],color:"#DB2777"},
+  ];
+  return(
+    <ExpandSection id="send-receive" dark label="How It Works" title="What You Send → What You Receive" sub="Whatever stage you're at, here's exactly what comes back." cta="Send Your First File">
+      <div style={{display:"grid",gridTemplateColumns:cols(w,2,1,1),gap:14}}>
+        {pairs.map((p,i)=>(
+          <FI key={p.send} d={i*60}>
+            <div style={{background:"white",borderRadius:14,border:"1.5px solid #E5E7EB",overflow:"hidden"}}>
+              <div style={{padding:"16px 18px",borderBottom:"1px solid #F3F4F6",display:"flex",alignItems:"center",gap:12}}>
+                <div style={{width:42,height:42,borderRadius:11,background:`${p.color}18`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:20,flexShrink:0}}>{p.icon}</div>
+                <div>
+                  <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:10,fontWeight:700,color:p.color,letterSpacing:1.5,textTransform:"uppercase",marginBottom:2}}>You Send</div>
+                  <div style={{fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:14,color:NAVY}}>{p.send}</div>
+                  <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:11,color:"#6B7280"}}>{p.sendSub}</div>
+                </div>
+              </div>
+              <div style={{padding:"14px 18px"}}>
+                <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:10,fontWeight:700,color:"#16A34A",letterSpacing:1.5,textTransform:"uppercase",marginBottom:8}}>You Receive</div>
+                {p.receive.map(r=><div key={r} style={{display:"flex",alignItems:"center",gap:8,padding:"5px 0"}}>
+                  <div style={{width:16,height:16,borderRadius:"50%",background:"#DCFCE7",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>
+                    <svg width="9" height="9" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#16A34A" strokeWidth="3" strokeLinecap="round"/></svg>
+                  </div>
+                  <span style={{fontFamily:"'DM Sans',sans-serif",fontSize:12,color:"#374151"}}>{r}</span>
+                </div>)}
+              </div>
+            </div>
+          </FI>
+        ))}
+      </div>
+    </ExpandSection>
+  );
+}
+
+/* ════════════════════════════════════════════════════════════════
+   Publication Roadmap — interactive timeline
+   ════════════════════════════════════════════════════════════════ */
+function PublicationRoadmap(){
+  const[active,setActive]=useState(0);
+  const w=useW();
+  const stages=[
+    {icon:"💡",label:"Research Idea",detail:"Hypothesis, objectives, PICO framework defined."},
+    {icon:"📋",label:"Protocol",detail:"Full protocol with methodology, sample size, SAP."},
+    {icon:"✅",label:"Ethics / IRB",detail:"Ethics application, informed consent, approvals."},
+    {icon:"🗂️",label:"Data Collection",detail:"CRF design, data tools, quality checks in the field."},
+    {icon:"📊",label:"Statistical Analysis",detail:"SPSS/R/STATA analysis with test selection rationale."},
+    {icon:"✍️",label:"Manuscript",detail:"Complete IMRAD manuscript, all sections written."},
+    {icon:"🎯",label:"Journal Selection",detail:"Indexed journal shortlisted by scope, IF, acceptance rate."},
+    {icon:"📬",label:"Submission",detail:"Cover letter, author declarations, portal submission."},
+    {icon:"🔁",label:"Reviewer Response",detail:"Point-by-point rebuttal and manuscript revision."},
+    {icon:"🏆",label:"Publication",detail:"Indexed in PubMed/Scopus — post-acceptance support."},
+  ];
+  const isMob=w<640;
+  return(
+    <ExpandSection id="roadmap" label="The Journey" title="Publication Roadmap" sub="From a research idea to an indexed publication — every milestone supported. Click a stage to see what happens." cta="Start Your Roadmap">
+      <div style={{position:"relative"}}>
+        {!isMob&&<div style={{position:"absolute",top:24,left:24,right:24,height:2,background:"#E5E7EB"}}/>}
+        <div style={{display:isMob?"flex":"grid",flexDirection:isMob?"column":undefined,gridTemplateColumns:isMob?undefined:cols(w,5,5,2),gap:isMob?10:8,position:"relative"}}>
+          {stages.map((s,i)=>(
+            <div key={s.label} onClick={()=>setActive(i)} style={{display:"flex",flexDirection:isMob?"row":"column",alignItems:isMob?"center":"center",gap:isMob?12:0,cursor:"pointer",WebkitTapHighlightColor:"transparent"}}>
+              <div style={{width:48,height:48,borderRadius:"50%",background:active===i?TEAL:i<active?"#DCFCE7":"white",border:`2px solid ${active===i?TEAL:i<active?"#16A34A":"#E5E7EB"}`,display:"flex",alignItems:"center",justifyContent:"center",fontSize:20,flexShrink:0,transition:"all .3s",boxShadow:active===i?"0 0 0 6px rgba(14,122,107,.15)":"none",zIndex:1}}>
+                {s.icon}
+              </div>
+              <div style={{textAlign:isMob?"left":"center",marginTop:isMob?0:8}}>
+                <div style={{fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:isMob?13:11,color:active===i?TEAL:NAVY,lineHeight:1.3}}>{i+1}. {s.label}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <FI key={active}>
+        <div style={{marginTop:24,background:"white",border:`1.5px solid ${TEAL}40`,borderRadius:12,padding:"18px 22px",display:"flex",alignItems:"center",gap:16,flexWrap:"wrap"}}>
+          <div style={{width:48,height:48,borderRadius:12,background:LT,display:"flex",alignItems:"center",justifyContent:"center",fontSize:22,flexShrink:0}}>{stages[active].icon}</div>
+          <div style={{flex:1,minWidth:200}}>
+            <div style={{fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:14,color:NAVY,marginBottom:3}}>Stage {active+1}: {stages[active].label}</div>
+            <div style={{fontFamily:"'DM Sans',sans-serif",fontSize:12,color:"#6B7280",lineHeight:1.6}}>{stages[active].detail}</div>
+          </div>
+          <div style={{display:"flex",gap:6}}>
+            <button onClick={()=>setActive(a=>Math.max(0,a-1))} style={{background:"white",border:"1.5px solid #E5E7EB",borderRadius:8,width:36,height:36,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center"}}>←</button>
+            <button onClick={()=>setActive(a=>Math.min(stages.length-1,a+1))} style={{background:TEAL,border:"none",borderRadius:8,width:36,height:36,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",color:"white"}}>→</button>
+          </div>
+        </div>
+      </FI>
+    </ExpandSection>
+  );
+}
+
+/* ════════════════════════════════════════════════════════════════
+   Reviewer Response Showcase
+   ════════════════════════════════════════════════════════════════ */
+function ReviewerResponseShowcase(){
+  const[open,setOpen]=useState(0);
+  const w=useW();
+  const examples=[
+    {
+      reviewer:"\u201CThe authors did not adjust for renal function in the multivariable model. eGFR is a well-known confounder of mortality risk and should be included.\u201D",
+      response:"We thank the reviewer for this important observation. We have re-run the multivariable logistic regression including eGFR (<60 vs. \u226560 ml/min) as an additional covariate (Table 3, revised). eGFR <60 ml/min was independently associated with 30-day mortality (adjusted OR 2.11, 95% CI 1.08\u20134.13; p = 0.029), and the associations for hypertension and diabetes remained statistically significant after this adjustment.",
+      change:"Table 3 revised to include eGFR as a covariate; Results and Discussion updated accordingly (tracked changes, page 8).",
+    },
+    {
+      reviewer:"\u201CThe sample size of 184 appears small for a logistic regression with five predictors. Please justify adequacy.\u201D",
+      response:"We appreciate this concern. A sample size calculation was performed a priori using G*Power 3.1.9.7, based on an expected 30-day mortality of 18% and a desired precision of \u00b15% (95% CI width 10%), yielding a minimum required sample of 226 patients (230 enrolled, 184 completed follow-up). With 38 events and 5 predictors, the events-per-variable ratio (7.6) meets conventional thresholds for stable logistic regression estimates.",
+      change:"Sample size justification added to Methods (new paragraph, page 5); G*Power citation added to references.",
+    },
+    {
+      reviewer:"\u201CThe discussion does not adequately address the single-centre design as a limitation.\u201D",
+      response:"We agree and have expanded the Limitations paragraph to explicitly address generalisability. We now state that the single-centre tertiary-care setting may limit external validity, and that case-mix at referral centres may differ from primary or secondary care settings. We have added a recommendation for multi-centre validation.",
+      change:"Limitations paragraph expanded (page 11); one sentence added to Conclusion recommending external validation.",
+    },
+  ];
+  return(
+    <ExpandSection id="reviewer" label="Reviewer Responses" title="Reviewer Response Showcase" sub="Real examples of how reviewer comments are addressed — professionally, point-by-point, with manuscript changes tracked." cta="Get Help With Your Reviewer Comments">
+      <div style={{display:"flex",gap:6,marginBottom:16,flexWrap:"wrap"}}>
+        {examples.map((e,i)=><button key={i} onClick={()=>setOpen(i)} style={{background:open===i?NAVY:"white",color:open===i?"white":"#374151",border:`1.5px solid ${open===i?NAVY:"#E5E7EB"}`,borderRadius:100,padding:"8px 16px",fontSize:12,fontFamily:"'DM Sans',sans-serif",fontWeight:600,cursor:"pointer",minHeight:38,WebkitTapHighlightColor:"transparent"}}>Comment {i+1}</button>)}
+      </div>
+      <div style={{display:"flex",flexDirection:"column",gap:0}}>
+        {/* Reviewer Comment */}
+        <div style={{background:"#FEF2F2",border:"1.5px solid #FEE2E2",borderRadius:"12px 12px 0 0",padding:"16px 18px"}}>
+          <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:8}}>
+            <div style={{width:28,height:28,borderRadius:8,background:"#FEE2E2",display:"flex",alignItems:"center",justifyContent:"center",fontSize:14}}>💬</div>
+            <span style={{fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:11,color:"#991B1B",letterSpacing:1,textTransform:"uppercase"}}>Reviewer Comment</span>
+          </div>
+          <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:13,color:"#374151",lineHeight:1.7,margin:0,fontStyle:"italic"}}>{examples[open].reviewer}</p>
+        </div>
+        {/* Arrow */}
+        <div style={{display:"flex",justifyContent:"center",background:"white",border:"1.5px solid #E5E7EB",borderTop:"none",borderBottom:"none"}}>
+          <div style={{width:32,height:32,borderRadius:"50%",background:LT,display:"flex",alignItems:"center",justifyContent:"center",margin:"-1px 0",transform:"translateY(-50%)",border:`2px solid ${TEAL}`}}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12l7 7 7-7" stroke={TEAL} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          </div>
+        </div>
+        {/* Author Response */}
+        <div style={{background:LT,border:`1.5px solid ${TEAL}40`,padding:"16px 18px"}}>
+          <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:8}}>
+            <div style={{width:28,height:28,borderRadius:8,background:"white",display:"flex",alignItems:"center",justifyContent:"center",fontSize:14}}>✍️</div>
+            <span style={{fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:11,color:NAVY,letterSpacing:1,textTransform:"uppercase"}}>Professional Author Response</span>
+          </div>
+          <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:13,color:"#1F4E42",lineHeight:1.75,margin:0}}>{examples[open].response}</p>
+        </div>
+        {/* Arrow */}
+        <div style={{display:"flex",justifyContent:"center",background:"white",border:"1.5px solid #E5E7EB",borderTop:"none",borderBottom:"none"}}>
+          <div style={{width:32,height:32,borderRadius:"50%",background:"#DCFCE7",display:"flex",alignItems:"center",justifyContent:"center",margin:"-1px 0",transform:"translateY(-50%)",border:"2px solid #16A34A"}}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12l7 7 7-7" stroke="#16A34A" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+          </div>
+        </div>
+        {/* Updated Manuscript */}
+        <div style={{background:"#F0FDF4",border:"1.5px solid #DCFCE7",borderRadius:"0 0 12px 12px",padding:"16px 18px"}}>
+          <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:8}}>
+            <div style={{width:28,height:28,borderRadius:8,background:"#DCFCE7",display:"flex",alignItems:"center",justifyContent:"center",fontSize:14}}>📄</div>
+            <span style={{fontFamily:"'DM Sans',sans-serif",fontWeight:700,fontSize:11,color:"#166534",letterSpacing:1,textTransform:"uppercase"}}>Updated Manuscript</span>
+          </div>
+          <p style={{fontFamily:"'DM Sans',sans-serif",fontSize:13,color:"#374151",lineHeight:1.7,margin:0}}>{examples[open].change}</p>
+        </div>
+      </div>
+    </ExpandSection>
+  );
+}
+
 
 function AIQualitySection(){
   const[tab,setTab]=useState(0);
@@ -1228,13 +1881,17 @@ export default function App(){
       <Hero/>
       <Dashboard/>
       <ProblemSection/>
+      <SendReceive/>
       <ClientScenarios/>
+      <PublicationRoadmap/>
       <SPSSWorkflow/>
+      <DeliverablesGallery/>
       <TLFGallery/>
       <PublicationFigures/>
       <CapabilitySection/>
       <ResearchDashboard/>
       <ProfessionalDeliverables/>
+      <ReviewerResponseShowcase/>
       <PRISMASection/>
       <ReportingStandards/>
       <MethodologyMatrix/>
